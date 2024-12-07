@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -23,15 +22,7 @@ class _HomePageState extends State<HomePage> {
         //SubtitleTextWidget lấy trong subtitles_text.dart
         SubtitleTextWidget(label:"hi, Again",color: Colors.red),
 
-        // che do sang toi
-        SwitchListTile(
-          title:
-              Text(themeProvider.getIsDarkTheme ? "Dark Mode" : "Light Mode"),
-          value: themeProvider.getIsDarkTheme,
-          onChanged: (value) {
-            themeProvider.setDarkTheme(themeValue: value);
-          },
-        )
+
       ],
     ));
   }

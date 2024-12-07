@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:shopeeclone/screens/cart_screen.dart';
+import 'package:shopeeclone/screens/cart/cart_screen.dart';
 import 'package:shopeeclone/screens/home_page.dart';
 import 'package:shopeeclone/screens/profile_screen.dart';
 import 'package:shopeeclone/screens/search_screen.dart';
