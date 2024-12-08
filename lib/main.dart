@@ -4,6 +4,7 @@ import 'package:shopeeclone/consts/theme_data.dart';
 import 'package:shopeeclone/providers/theme_provider.dart';
 import 'package:shopeeclone/root_screen.dart';
 import 'package:shopeeclone/screens/home_page.dart';
+import 'package:shopeeclone/screens/inner_screens/products_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
           theme: Styles.themeData(
               isDarkTheme: themeProvider.getIsDarkTheme, context: context),
           home: const RootScreen(),
+          routes: {
+            ProductsDetails.routeName: (context) => const ProductsDetails(),
+          },
         );
       }),
     );

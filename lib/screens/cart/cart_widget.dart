@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:shopeeclone/consts/app_constants.dart';
 import 'package:shopeeclone/screens/cart/qnt_btm_sheet_widget.dart';
 import 'package:shopeeclone/widgets/subtitles_text.dart';
 import 'package:shopeeclone/widgets/titles_text.dart';
@@ -21,8 +22,8 @@ class CartWidget extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: FancyShimmerImage(
-                  imageUrl:
-                      "https://cf.shopee.vn/file/vn-11134258-7ras8-m0sil68ehi1b66_xxhdpi",
+                  // AppConstants.productImageUrl tại consts/appConstants
+                  imageUrl: AppConstants.productImageUrl,
                   height: size.height * 0.2,
                   width: size.width * 0.2,
                 ),
