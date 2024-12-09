@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+import 'package:shopeeclone/providers/cart_provider.dart';
 import 'package:shopeeclone/screens/cart/cart_bottom_checkout.dart';
 import 'package:shopeeclone/screens/cart/cart_widget.dart';
 import 'package:shopeeclone/services/assets_manager.dart';
@@ -14,9 +16,8 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //MediaQuery để lấy kthước m/hình thiết bị (chiều rộng và chiều cao). Biến size sử dụng sau này để đặt kích thước cho các widget.
-    Size size = MediaQuery.of(context).size;
-    return isEmpty
+    final cartProvider = Provider.of<CartProvider>(context);
+    return cartProvider.getCartItems.isEmpty
         ? Scaffold(
             // khung EmptyBagWidget đã tạo ở file widget/empty_widget_bag.dart
             body: EmptyBagWidget(
@@ -40,7 +41,7 @@ class CartScreen extends StatelessWidget {
                 )
               ],
               //ten appbar
-              title: const TitleTextWidget(label: "Cart(5)"),
+              title:  TitleTextWidget(label: "${cartProvider.getCartItems.length}"),
               // images appbar
               leading: Image.asset(AssetsManager.shoppingCart),
             ),
@@ -53,10 +54,13 @@ class CartScreen extends StatelessWidget {
             // itemBuilder: (context, index) => const CartWidget() => để tạo item CartWidget m��i khi listview builder xem thấy 1 item.
             // listview builder s�� hiển thị 30 item CartWidget.
             body: ListView.builder(
-              itemCount: 30,
+              itemCount: cartProvider.getCartItems.length,
               itemBuilder: (context, index) {
                 // file cart_widget.dart
-                return const CartWidget();
+                return ChangeNotifierProvider.value(
+                  value: cartProvider.getCartItems.values.toList()[index],
+                  child: const CartWidget()
+                );
               },
             ),
             //file qnt_btm_widget.dart

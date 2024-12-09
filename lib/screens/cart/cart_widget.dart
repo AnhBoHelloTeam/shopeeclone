@@ -1,7 +1,10 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 import 'package:shopeeclone/consts/app_constants.dart';
+import 'package:shopeeclone/models/cart_model.dart';
+import 'package:shopeeclone/providers/product_provider.dart';
 import 'package:shopeeclone/screens/cart/qnt_btm_sheet_widget.dart';
 import 'package:shopeeclone/widgets/subtitles_text.dart';
 import 'package:shopeeclone/widgets/titles_text.dart';
@@ -11,9 +14,16 @@ class CartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartModelProvider = Provider.of<CartModel>(context);
+
+    final productProvider = Provider.of<ProductProvider>(context);
+    final getCurrentProduct = productProvider.findByProdId(cartModelProvider.productId);
+
     // kicsh thuoc man hinh
     Size size = MediaQuery.of(context).size;
-    return FittedBox(
+  return getCurrentProduct == null 
+    ? const SizedBox.shrink() 
+    : FittedBox(
       child: IntrinsicWidth(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -23,7 +33,7 @@ class CartWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: FancyShimmerImage(
                   // AppConstants.productImageUrl tại consts/appConstants
-                  imageUrl: AppConstants.productImageUrl,
+                  imageUrl: getCurrentProduct.productImage,
                   height: size.height * 0.2,
                   width: size.width * 0.2,
                 ),
@@ -39,7 +49,7 @@ class CartWidget extends StatelessWidget {
                         SizedBox(
                           width: size.width * 0.5,
                           child: TitleTextWidget(
-                            label: "Title" * 10,
+                            label: getCurrentProduct.productTitle,
                             maxLines: 3,
                           ),
                         ),
@@ -71,14 +81,15 @@ class CartWidget extends StatelessWidget {
                       ],
                     ),
                     // lit chọn sản phẩm (mở ra loạt lựa chọn)
-                   Align(
-                      alignment: Alignment.centerLeft, 
+                    Align(
+                      alignment: Alignment.centerLeft,
                       child: SizedBox(
                         width: 200, // Đặt chiều rộng tùy ý
                         child: OutlinedButton.icon(
                           onPressed: () async {
                             await showModalBottomSheet(
-                              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                              backgroundColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
                               context: context,
                               builder: (context) {
                                 return QuantityBottomSheetWidget();
@@ -88,22 +99,24 @@ class CartWidget extends StatelessWidget {
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8), // Bo góc nhẹ (8px)
+                                borderRadius: BorderRadius.circular(
+                                    8), // Bo góc nhẹ (8px)
                               ),
                             ),
                           ),
-                          label: Text("Màu "),
+                          label: Text("Option: ${cartModelProvider.quantity} "),
                           icon: Icon(IconlyLight.arrowDownCircle),
                         ),
                       ),
                     ),
 
-
-                        SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       children: [
-                        const SubtitleTextWidget(
-                          label: "đ\16.000",
+                        SubtitleTextWidget(
+                          label: "${getCurrentProduct.productPrice}\$",
                           fontSize: 20,
                           color: Colors.orange,
                         ),

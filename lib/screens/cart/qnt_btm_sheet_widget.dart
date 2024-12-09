@@ -10,8 +10,8 @@ class QuantityBottomSheetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 20,),
-        Container(height: 6,width: 50,decoration: BoxDecoration(
+        const SizedBox(height: 2,),
+        Container(height: 6,width: 15,decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
         ),),
         Expanded(
