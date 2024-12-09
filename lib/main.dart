@@ -63,5 +63,9 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+<<<<<<< HEAD
 ///hello dnhan
+=======
+///hello nhan tien son dadn
+>>>>>>> d2808b8ca142ab9841e427145006203f19afcb81
 ////////////////////////////////////////////////////////////////
