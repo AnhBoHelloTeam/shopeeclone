@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopeeclone/providers/theme_provider.dart';
+import 'package:shopeeclone/screens/inner_screens/viewed_recently.dart';
+import 'package:shopeeclone/screens/inner_screens/wishlist_screen.dart';
 import 'package:shopeeclone/services/assets_manager.dart';
 import 'package:shopeeclone/widgets/app_name_text.dart';
 import 'package:shopeeclone/widgets/custom_list_title.dart';
@@ -24,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
           // images appbar
           leading: Image.asset(AssetsManager.shoppingCart),
         ),
-          // 
+        //
 
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +57,8 @@ class ProfileScreen extends StatelessWidget {
                         width: 3,
                       ),
                       image: const DecorationImage(
-                        image: NetworkImage("https://imagev3.vietnamplus.vn/w820/Uploaded/2024/mzdic/2024_11_13/ttxvn-ty-phu-elon-musk-1311-3606.jpg.webp"),
+                        image: NetworkImage(
+                            "https://imagev3.vietnamplus.vn/w820/Uploaded/2024/mzdic/2024_11_13/ttxvn-ty-phu-elon-musk-1311-3606.jpg.webp"),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -87,13 +90,18 @@ class ProfileScreen extends StatelessWidget {
 
                   CustomListTitle(
                       imagePath: AssetsManager.wishlistSvg,
-                      text: "Wishlist",
-                      function: () {}),
+                      text: "Danh sách yêu thích",
+                      function: () {
+                        Navigator.pushNamed(context, WishlistScreen.routeName);
+                      }),
 
                   CustomListTitle(
                       imagePath: AssetsManager.recent,
                       text: "Views recently",
-                      function: () {}),
+                      function: () {
+                        Navigator.pushNamed(context, RecentlyViewedScreen.routeName);
+
+                      }),
 
                   CustomListTitle(
                       imagePath: AssetsManager.address,
@@ -136,15 +144,15 @@ class ProfileScreen extends StatelessWidget {
                   Center(
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        )
-                      ),
+                          backgroundColor: Colors.red,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          )),
                       onPressed: () {},
                       icon: const Icon(Icons.login),
-                      label:const Text("Login"),
-                  ),),
+                      label: const Text("Login"),
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -12,7 +12,7 @@ class TitleTextWidget extends StatelessWidget {
   const TitleTextWidget({
       super.key,
       required this.label,
-      this.fontSize = 20,
+      this.fontSize = 18,
       this.fontStyle = FontStyle.normal,
       this.fontWeight = FontWeight.normal,
       this.color,

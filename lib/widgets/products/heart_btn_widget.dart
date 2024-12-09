@@ -4,7 +4,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 class HeartBtnWidget extends StatefulWidget {
   final double size;
   final Color colors;
-  const HeartBtnWidget({super.key,  this.size=22,  this.colors = Colors.orange});
+  const HeartBtnWidget({super.key,  this.size=22,  this.colors = Colors.blueGrey});
 
   @override
   State<HeartBtnWidget> createState() => _HeartBtnWidgetState();
