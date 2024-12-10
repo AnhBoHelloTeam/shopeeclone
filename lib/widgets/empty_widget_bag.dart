@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shopeeclone/services/assets_manager.dart';
 import 'package:shopeeclone/widgets/subtitles_text.dart';
 import 'package:shopeeclone/widgets/titles_text.dart';
 

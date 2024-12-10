@@ -45,7 +45,7 @@ class PickImageWidget extends StatelessWidget {
               function();
             },
             child:const Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Icon(
                 Icons.camera_alt,
                 size: 20,

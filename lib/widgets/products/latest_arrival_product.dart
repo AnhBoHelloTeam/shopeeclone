@@ -1,9 +1,10 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:shopeeclone/consts/app_constants.dart';
+import 'package:provider/provider.dart';
+import 'package:shopeeclone/models/products_models.dart';
+import 'package:shopeeclone/providers/viewed_prod_provider.dart';
 import 'package:shopeeclone/screens/inner_screens/products_details.dart';
-import 'package:shopeeclone/widgets/products/product_widget.dart';
+import 'package:shopeeclone/widgets/products/heart_btn_widget.dart';
 import 'package:shopeeclone/widgets/subtitles_text.dart';
 
 class LatesteArrivalProductsWidgets extends StatelessWidget {
@@ -11,18 +12,24 @@ class LatesteArrivalProductsWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // gán dữ liệu ở ProductModel vào productModel
+    final productModel = Provider.of<ProductModel>(context);
+    final viewedProdvider = Provider.of<ViewedProdProvider>(context);
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       //GestureDetector để lấy click on
       child: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, ProductsDetails.routeName);
+        onTap: () async {
+          viewedProdvider.addProductToHistory(
+              productId: productModel.productId);
+          Navigator.pushNamed(context, ProductsDetails.routeName,
+              arguments: productModel.productId);
         },
         // bọc row trong sizebox để làm từng git
         child: SizedBox(
-          width: size.width * 0.4,
-          child: Column(
+          width: size.width * 0.45,
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //
@@ -31,23 +38,23 @@ class LatesteArrivalProductsWidgets extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: FancyShimmerImage(
                     //AppConstants.productImageUrl đã fix ở const/app_constants.dart
-                    imageUrl: AppConstants.productImageUrl,
-                    width: size.width * 0.25,
-                    height: size.height * 0.25,
+                    imageUrl: productModel.productImage,
+                    width: size.width * 0.28,
+                    height: size.height * 0.28,
                   ),
                 ),
               ),
               ////////
               const SizedBox(
-                width: 15,
+                width: 7,
               ),
               Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Flexible (
+                    Flexible(
                       child: Text(
-                        "Title" * 5,
+                        productModel.productTitle,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -55,17 +62,21 @@ class LatesteArrivalProductsWidgets extends StatelessWidget {
                     FittedBox(
                       child: Row(
                         children: [
-                          IconButton(
-                              onPressed: () {}, icon: Icon(IconlyLight.heart)),
+                          HeartBtnWidget(productId: productModel.productId),
                           IconButton(
                             onPressed: () {},
-                            icon:
-                                Icon(Icons.add_shopping_cart_rounded, size: 20),
+                            icon: const Icon(Icons.add_shopping_cart_rounded,
+                                size: 20),
                           ),
                         ],
                       ),
                     ),
-
+                    FittedBox(
+                      child: SubtitleTextWidget(
+                        label: "${productModel.productPrice}\$",
+                        color: Colors.orange,
+                      ),
+                    )
                     ////////////////////////////////////////////////////////////////
                   ],
                 ),

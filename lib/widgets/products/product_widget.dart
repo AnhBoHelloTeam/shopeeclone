@@ -54,7 +54,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: FancyShimmerImage(
-                      imageUrl: getCurrentProduct!.productImage,
+                      imageUrl: getCurrentProduct.productImage,
                       height: size.height * 0.22,
                       width: double.infinity,
                     ),
@@ -66,11 +66,13 @@ class _ProductWidgetState extends State<ProductWidget> {
                       Flexible(
                           flex: 5,
                           child: TitleTextWidget(
-                            label: getCurrentProduct!.productTitle,
+                            label: getCurrentProduct.productTitle,
                             maxLines: 2,
                             fontSize: 18,
                           )),
-                      Flexible(flex: 2, child: HeartBtnWidget()),
+                      Flexible(flex: 2, child: HeartBtnWidget(
+                        productId: getCurrentProduct.productId,
+                      )),
                     ],
                   ),
                   const SizedBox(

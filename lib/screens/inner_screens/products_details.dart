@@ -1,17 +1,17 @@
-
-
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopeeclone/providers/cart_provider.dart';
 import 'package:shopeeclone/providers/product_provider.dart';
 import 'package:shopeeclone/widgets/app_name_text.dart';
 import 'package:shopeeclone/widgets/products/heart_btn_widget.dart';
 import 'package:shopeeclone/widgets/subtitles_text.dart';
 import 'package:shopeeclone/widgets/titles_text.dart';
+
 ////
 ///////
 /////
-//gọi thông qua Named Routes - 
+//gọi thông qua Named Routes -
 // mở mình thì sdụng Navigator.pushNamed or Navigator.pushReplacementNamed từ màn hình khác và truyền productId làm tham số.
 ///// nhấn vào hình sẽ qua sản phẩm
 class ProductsDetails extends StatefulWidget {
@@ -26,9 +26,10 @@ class _ProductsDetailsState extends State<ProductsDetails> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
- final productProvider = Provider.of<ProductProvider>(context);
+    final productProvider = Provider.of<ProductProvider>(context);
     final productId = ModalRoute.of(context)!.settings.arguments as String;
     final getCurrentProduct = productProvider.findByProdId(productId);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
           title: const AppNameTextWidget(
@@ -67,29 +68,29 @@ class _ProductsDetailsState extends State<ProductsDetails> {
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                
                     children: [
                       //co giãn một cách linh hoạt nhưng không bị ép buộc chiếm toàn bộ không gian.
                       Flexible(
                         child: Text(
                           getCurrentProduct.productTitle,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       ),
-                       SubtitleTextWidget(
-                        label: "${getCurrentProduct!.productPrice}\$",
+                      SubtitleTextWidget(
+                        label: "${getCurrentProduct.productPrice}\$",
                         color: Colors.orange,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   Padding(
@@ -98,11 +99,13 @@ class _ProductsDetailsState extends State<ProductsDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         HeartBtnWidget(
+                          productId: getCurrentProduct.productId,
                           colors: Colors.blue.shade300,
                         ),
                         const SizedBox(
                           width: 10,
                         ),
+                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         Expanded(
                           child: SizedBox(
                             height: kBottomNavigationBarHeight - 10,
@@ -113,9 +116,27 @@ class _ProductsDetailsState extends State<ProductsDetails> {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                               ),
-                              onPressed: () {},
-                              icon: const Icon(Icons.add_shopping_cart),
-                              label: Text("Add to Cart"),
+                              // hiệu ướng bấm vào nút
+                              onPressed: () {
+                                if (cartProvider.isProductInCart(
+                                    ProductId: getCurrentProduct.productId)) {
+                                  return;
+                                }
+                                cartProvider.addProductToCart(
+                                  productId:getCurrentProduct.productId); 
+                              },
+                              icon:  Icon(
+                                cartProvider.isProductInCart(
+                                  ProductId:getCurrentProduct.productId)
+                                ? Icons.check
+                                : Icons.add_shopping_cart_rounded
+                              ),
+                              label: Text(
+                                cartProvider.isProductInCart(
+                                  ProductId: getCurrentProduct.productId)
+                                ? "In cart"
+                                : "Add to cart"
+                              ),
                             ),
                           ),
                         ),
@@ -125,12 +146,12 @@ class _ProductsDetailsState extends State<ProductsDetails> {
                 ],
               ),
             ),
-        ////////////////////////////////////////////////////////////////////
-        
+            ////////////////////////////////////////////////////////////////////
+
             const SizedBox(
               width: 10,
             ),
-             Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const TitleTextWidget(label: "thông tin về sản phẩm"),
@@ -140,9 +161,10 @@ class _ProductsDetailsState extends State<ProductsDetails> {
             const SizedBox(
               width: 20,
             ),
-        
-            SubtitleTextWidget(label: getCurrentProduct.productDescription,
-            textAlign: TextAlign.left,
+
+            SubtitleTextWidget(
+              label: getCurrentProduct.productDescription,
+              textAlign: TextAlign.left,
             ),
           ],
         ),

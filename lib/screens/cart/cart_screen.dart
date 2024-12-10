@@ -5,9 +5,8 @@ import 'package:shopeeclone/providers/cart_provider.dart';
 import 'package:shopeeclone/screens/cart/cart_bottom_checkout.dart';
 import 'package:shopeeclone/screens/cart/cart_widget.dart';
 import 'package:shopeeclone/services/assets_manager.dart';
-import 'package:shopeeclone/widgets/app_name_text.dart';
+import 'package:shopeeclone/services/my_app_methods.dart';
 import 'package:shopeeclone/widgets/empty_widget_bag.dart';
-import 'package:shopeeclone/widgets/subtitles_text.dart';
 import 'package:shopeeclone/widgets/titles_text.dart';
 
 class CartScreen extends StatelessWidget {
@@ -16,6 +15,9 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //
+    //CartProvider sẽ xử lí sản phẩm khi đã vào giỏ hàng ( link cart_provider.dart)
+    //
     final cartProvider = Provider.of<CartProvider>(context);
     return cartProvider.getCartItems.isEmpty
         ? Scaffold(
@@ -33,7 +35,15 @@ class CartScreen extends StatelessWidget {
             appBar: AppBar(
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    MyAppMethods.showErrorOrWarningDialog(
+                      isError :false,
+                        context: context,
+                        subtite: "Remote Items",
+                        ftc: () {
+                          cartProvider.clearLocalCart();
+                    });
+                  },
                   icon: const Icon(
                     IconlyLight.delete,
                     color: Colors.red,
@@ -41,7 +51,8 @@ class CartScreen extends StatelessWidget {
                 )
               ],
               //ten appbar
-              title:  TitleTextWidget(label: "${cartProvider.getCartItems.length}"),
+              title: TitleTextWidget(
+                  label: " Cart (${cartProvider.getCartItems.length})"),
               // images appbar
               leading: Image.asset(AssetsManager.shoppingCart),
             ),
@@ -53,15 +64,22 @@ class CartScreen extends StatelessWidget {
             // itemCount: 30 là số lượng item hiển thị
             // itemBuilder: (context, index) => const CartWidget() => để tạo item CartWidget m��i khi listview builder xem thấy 1 item.
             // listview builder s�� hiển thị 30 item CartWidget.
-            body: ListView.builder(
-              itemCount: cartProvider.getCartItems.length,
-              itemBuilder: (context, index) {
-                // file cart_widget.dart
-                return ChangeNotifierProvider.value(
-                  value: cartProvider.getCartItems.values.toList()[index],
-                  child: const CartWidget()
-                );
-              },
+            body: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: cartProvider.getCartItems.length,
+                    itemBuilder: (context, index) {
+                      // file cart_widget.dart
+                      return ChangeNotifierProvider.value(
+                          value: cartProvider.getCartItems.values.toList()
+                          .reversed
+                          .toList()[index],
+                          child: const CartWidget());
+                    },
+                  ),
+                ),
+              ],
             ),
             //file qnt_btm_widget.dart
             bottomSheet: const CartBottomCheckout(),

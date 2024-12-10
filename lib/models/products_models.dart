@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+// dữ liệu bên product_provider lưu vào các trường
 class ProductModel with ChangeNotifier {
   final String productId,
       productTitle,

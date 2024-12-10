@@ -11,8 +11,8 @@ class AppNameTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     //shimer là thư viện màu
     return Shimmer.fromColors(
-      child: TitleTextWidget(label: "Clone Shoppe"),
       baseColor: Colors.purple,
-      highlightColor: Colors.red,);
+      highlightColor: Colors.red,
+      child: TitleTextWidget(label: "Clone Shoppe"),);
   }
 }

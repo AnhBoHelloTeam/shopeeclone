@@ -4,11 +4,12 @@ import 'package:shopeeclone/consts/theme_data.dart';
 import 'package:shopeeclone/providers/cart_provider.dart';
 import 'package:shopeeclone/providers/product_provider.dart';
 import 'package:shopeeclone/providers/theme_provider.dart';
+import 'package:shopeeclone/providers/viewed_prod_provider.dart';
+import 'package:shopeeclone/providers/wishlist_provider.dart';
 import 'package:shopeeclone/root_screen.dart';
 import 'package:shopeeclone/screens/auth/forgot_password.dart';
 import 'package:shopeeclone/screens/auth/login.dart';
 import 'package:shopeeclone/screens/auth/register.dart';
-import 'package:shopeeclone/screens/home_page.dart';
 import 'package:shopeeclone/screens/inner_screens/order/orders_screen.dart';
 import 'package:shopeeclone/screens/inner_screens/products_details.dart';
 import 'package:shopeeclone/screens/inner_screens/viewed_recently.dart';
@@ -34,9 +35,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
         ),
-
         ChangeNotifierProvider(
           create: (context) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => WishlistProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ViewedProdProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(

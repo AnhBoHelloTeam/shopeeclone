@@ -1,14 +1,12 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopeeclone/consts/app_constants.dart';
-import 'package:shopeeclone/providers/theme_provider.dart';
+import 'package:shopeeclone/providers/product_provider.dart';
 import 'package:shopeeclone/services/assets_manager.dart';
 import 'package:shopeeclone/widgets/app_name_text.dart';
 import 'package:shopeeclone/widgets/products/ctg_rounded_widget.dart';
 import 'package:shopeeclone/widgets/products/latest_arrival_product.dart';
-import 'package:shopeeclone/widgets/subtitles_text.dart';
 import 'package:shopeeclone/widgets/titles_text.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,13 +19,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);  
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         //  AppNameTextWidget ở file app_name_text.dart
-        title: AppNameTextWidget(),
+        title: const AppNameTextWidget(),
         // images appbar
-        leading: Image.asset(AssetsManager.shoppingCart),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(AssetsManager.shoppingCart),
+        ),
       ),
       //
       // xu ly banner
@@ -55,11 +57,11 @@ class _HomePageState extends State<HomePage> {
                       )),
                 ),
               ),
-          
+
               //
               //spham
               ////////////////////////////////////////////////////////////////
-              SizedBox(
+              const SizedBox(
                 height: 18,
               ),
               const TitleTextWidget(
@@ -68,10 +70,10 @@ class _HomePageState extends State<HomePage> {
               ),
               ////////////////////////////////////////////////////////////////
               /// danh mục sản phẩm
-              SizedBox(
+              const SizedBox(
                 height: 14,
               ),
-          
+
               SizedBox(
                 height: size.height * 0.2,
                 child: ListView.builder(
@@ -80,11 +82,14 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, index) {
                     ///// widgets/products/latest_arrival_product.dart
                     ///xuu ly cac san pham
-                    return LatesteArrivalProductsWidgets();
+                    return ChangeNotifierProvider.value(
+                      value: productProvider.getProducts[index],
+                      child: const LatesteArrivalProductsWidgets()
+                    );
                   },
                 ),
               ),
-          
+
               const TitleTextWidget(
                 label: "Gợi ý hôm nay",
                 fontSize: 22,
@@ -92,22 +97,22 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 2,
               ),
-          //////////////////////////////////
-          /// 1 lisst mới
+              //////////////////////////////////
+              /// 1 lisst mới
               GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 4,
-                children: 
-                  List.generate(
-                    AppConstants.categoriesList.length,
-                    (index) {
-                      // đã cấu hình ở ctg_rounded_widgets.dart
-                      return CategoryRoundedWidget(
-                        image: AppConstants.categoriesList[index].images,
-                        name: AppConstants.categoriesList[index].name,
-                      );
-                  },),
+                children: List.generate(
+                  AppConstants.categoriesList.length,
+                  (index) {
+                    // đã cấu hình ở ctg_rounded_widgets.dart
+                    return CategoryRoundedWidget(
+                      image: AppConstants.categoriesList[index].images,
+                      name: AppConstants.categoriesList[index].name,
+                    );
+                  },
+                ),
               )
             ],
           ),

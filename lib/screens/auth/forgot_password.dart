@@ -78,7 +78,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             const SubtitleTextWidget(
               label:
-                  "please enter the mail address you\'d like your password...",
+                  "please enter the mail address you'd like your password...",
               fontSize: 14,
             ),
             const SizedBox(

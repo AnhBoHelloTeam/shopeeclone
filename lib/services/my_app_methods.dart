@@ -8,7 +8,7 @@ class MyAppMethods {
     required BuildContext context,
     required String subtite,
     required Function ftc,
-    bool iserror = true,
+    bool isError = true,
   }) async {
     await showDialog(
       context: context,
@@ -32,18 +32,20 @@ class MyAppMethods {
                 height: 16,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Visibility(
-                      visible: !iserror,
+                      visible: !isError,
                       child: TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: SubtitleTextWidget(
+                          child: const SubtitleTextWidget(
                               label: "Cancel", color: Colors.green))),
                   TextButton(
                       onPressed: () {
                         ftc();
+                        Navigator.pop(context);
                       },
                       child: const SubtitleTextWidget(
                           label: "Ok", color: Colors.red))
@@ -76,39 +78,40 @@ class MyAppMethods {
               children: [
                 ////////////////////////////////////////////////////////////////////////////////////////////////
                 TextButton.icon(
-                onPressed: (){
-                  cameraFCT();
-                  if(Navigator.canPop(context)){
-                    Navigator.pop(context);
-                  }
-                },
-                icon: const Icon(Icons.camera),
-                label: const Text("camera"
-                ),
-                ),
-                ///////////////////////////////////////////////////////////////////////////////////////////////////
-              TextButton.icon(
-                onPressed: (){
-                  galleryFCT();
-                  if(Navigator.canPop(context)){
-                    Navigator.pop(context);
-                  }
-                },
-                icon: const Icon(Icons.image),
-                label: const Text("Gallery",
-                ),
+                  onPressed: () {
+                    cameraFCT();
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    }
+                  },
+                  icon: const Icon(Icons.camera),
+                  label: const Text("camera"),
                 ),
                 ///////////////////////////////////////////////////////////////////////////////////////////////////
-              TextButton.icon(
-                onPressed: (){
-                  remoteFCT();
-                  if(Navigator.canPop(context)){
-                    Navigator.pop(context);
-                  }
-                },
-                icon: const Icon(Icons.remove),
-                label: const Text("Remove",
+                TextButton.icon(
+                  onPressed: () {
+                    galleryFCT();
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    }
+                  },
+                  icon: const Icon(Icons.image),
+                  label: const Text(
+                    "Gallery",
+                  ),
                 ),
+                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                TextButton.icon(
+                  onPressed: () {
+                    remoteFCT();
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    }
+                  },
+                  icon: const Icon(Icons.remove),
+                  label: const Text(
+                    "Remove",
+                  ),
                 ),
               ],
             ),
