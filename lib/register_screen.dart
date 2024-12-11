@@ -76,8 +76,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String hint,
-      IconData icon, {bool obscureText = false}) {
+  Widget _buildTextField(
+      TextEditingController controller, String hint, IconData icon,
+      {bool obscureText = false}) {
     return TextField(
       controller: controller,
       obscureText: obscureText,
