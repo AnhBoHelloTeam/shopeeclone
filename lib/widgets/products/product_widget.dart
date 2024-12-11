@@ -1,11 +1,8 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
-import 'package:shopeeclone/models/cart_model.dart';
 import 'package:shopeeclone/providers/cart_provider.dart';
 import 'package:shopeeclone/providers/product_provider.dart';
-import 'package:shopeeclone/screens/cart/qnt_btm_sheet_widget.dart';
 import 'package:shopeeclone/screens/inner_screens/products_details.dart';
 import 'package:shopeeclone/widgets/products/heart_btn_widget.dart';
 import 'package:shopeeclone/widgets/subtitles_text.dart';

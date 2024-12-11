@@ -6,6 +6,7 @@ import 'package:shopeeclone/screens/profile_screen.dart';
 import 'package:shopeeclone/screens/search_screen.dart';
 // điều hướng thanh công cụ tới các trang
 class RootScreen extends StatefulWidget {
+  static const routeName = '/RootScreen';
   const RootScreen({super.key});
 
   @override

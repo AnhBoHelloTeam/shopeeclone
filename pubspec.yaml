@@ -36,6 +36,15 @@ dependencies:
   ionicons: ^0.2.2
   image_picker: ^1.0.4
   uuid: ^3.0.6
+  path_provider: ^2.0.11
+
+  firebase_core: ^3.8.1  # Phiên bản firebase_core của bạn
+  firebase_auth: 5.3.4
+  firebase_storage: 12.3.7
+  fluttertoast: ^8.2.4
+  cloud_firestore: ^5.5.1
+  google_sign_in: ^6.1.6
+
 
 dev_dependencies:
   flutter_test:

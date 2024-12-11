@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "799154691716",
+    "project_id": "cloneshopee-7dfe1",
+    "storage_bucket": "cloneshopee-7dfe1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799154691716:android:53013b20ab64b4712eecd1",
+        "android_client_info": {
+          "package_name": "com.shopeeclone.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDshMRMkGDrLUno25Eg4e8KRrWW9fB_nzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,40 +13,21 @@ class AppConstants {
   ];
 // laasy trường ở models/category_models.dart
   static List<CategoryModels> categoriesList = [
+    CategoryModels(id: "iphone", images: AssetsManager.mobiles, name: "phones"),
+    CategoryModels(id: "Shoes", images: AssetsManager.shoes, name: "Shoes"),
+    CategoryModels(id: "Books", images: AssetsManager.book, name: "Books"),
     CategoryModels(
-      id: "iphone",
-      images: AssetsManager.mobiles,
-      name: "phones"
-    ),
+        id: "cosmetics", images: AssetsManager.cosmetics, name: "cosmetics"),
+    CategoryModels(id: "watch", images: AssetsManager.watch, name: "watch"),
+    CategoryModels(id: "Laptop", images: AssetsManager.pc, name: "Laptop"),
     CategoryModels(
-      id: "Shoes",
-      images: AssetsManager.shoes,
-      name: "Shoes"
-    ),
-    CategoryModels(
-      id: "Books",
-      images: AssetsManager.book,
-      name: "Books"
-    ),
-    CategoryModels(
-      id: "cosmetics",
-      images: AssetsManager.cosmetics,
-      name: "cosmetics"
-    ),
-    CategoryModels(
-      id: "watch",
-      images: AssetsManager.watch,
-      name: "watch"
-    ),
-    CategoryModels(
-      id: "Laptop",
-      images: AssetsManager.pc,
-      name: "Laptop"
-    ),
-    CategoryModels(
-      id: "electronics",
-      images: AssetsManager.electronics,
-      name: "electronics"
-    ),
+        id: "electronics",
+        images: AssetsManager.electronics,
+        name: "electronics"),
   ];
+
+  static String apiKey = "AIzaSyBuf94wKn8Nj3BQrdahZ8reyhe7hweBry4";
+  static String appId ="1:799154691716:web:944ef0bece1cda5c2eecd1";
+  static String messagingSenderId ="799154691716";
+  static String projectId ="cloneshopee-7dfe1";
 }

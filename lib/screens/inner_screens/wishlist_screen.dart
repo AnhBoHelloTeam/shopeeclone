@@ -1,8 +1,6 @@
-import 'dart:ui_web';
 
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shopeeclone/providers/wishlist_provider.dart';
 import 'package:shopeeclone/services/assets_manager.dart';
