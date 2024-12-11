@@ -26,8 +26,8 @@ class AppConstants {
         name: "electronics"),
   ];
 
-  static String apiKey = "AIzaSyBuf94wKn8Nj3BQrdahZ8reyhe7hweBry4";
-  static String appId ="1:799154691716:web:944ef0bece1cda5c2eecd1";
-  static String messagingSenderId ="799154691716";
-  static String projectId ="cloneshopee-7dfe1";
+  static String apiKey = "*************************";
+  static String appId ="*************************";
+  static String messagingSenderId ="*************************";
+  static String projectId ="*************************";
 }
